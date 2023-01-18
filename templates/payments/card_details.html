@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Sofia"
+    />
+    <link
+      href="{% static 'css/webflow.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="{% static 'images/favicon.ico' %}"
+      rel="shortcut icon"
+      type="image/x-icon"
+    />
+    <title>SAW-T Concept</title>
+  </head>
+  <body>
+    <section class="gradient-background">
+      <div class="moble-lgo">
+        <img src="./lgo.png" alt="" class="mob-lgo" />
+      </div>
+      <!-- <div class="error-feedback">An error eccoured while making payment. Insufficient funds</div> -->
+      <div class="form-cover">
+        <div class="form-container">
+          <div class="form-container-header">
+            <h1 class="title">Input card details</h1>
+          </div>
+          <form action="" class="cover-form">
+            <div class="imput-holder">
+              <h6 class="placeholder">Card number</h6>
+              <input
+                type="number"
+                class="txt-input"
+                placeholder="0000 0000 0000 0000"
+              />
+            </div>
+            <div class="imput-holder excuse">
+              <h6 class="placeholder">Expiry Date</h6>
+              <input type="text" class="txt-input" placeholder="MM/YY" />
+            </div>
+            <div class="imput-holder excuse">
+              <h6 class="placeholder">CVC/CVV</h6>
+              <input type="text" class="txt-input" placeholder="..." />
+            </div>
+            <div class="imput-holder excuse">
+              <h6 class="placeholder">Name on card</h6>
+              <input
+                type="text"
+                class="txt-input"
+                placeholder="Enter card holder fullname"
+              />
+            </div>
+            <button class="cta">Make Payment</button>
+          </form>
+        </div>
+        <img src="./advert.png" alt="" class="advert" />
+      </div>
+      <div class="validate">Powered and secured by SAW-T concept</div>
+    </section>
+  </body>
+</html>
