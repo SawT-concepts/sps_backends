@@ -1,4 +1,3 @@
-from urllib import response
 from django.conf import settings
 import requests
 

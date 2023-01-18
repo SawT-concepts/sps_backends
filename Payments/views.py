@@ -220,7 +220,7 @@ def initiate_payment(request, payment_id):
 
     return render(request, "payments/initiate_payment.html", context)
 
-
+# Process form where user input his card information
 def card_details(request):
     context = {}
     return render(request, "payments/card_details.html", context)
@@ -244,8 +244,6 @@ def verify_payment(request, ref):
             "site": current_site,
             "debt": debt
         }
-
-
     # todo The email send function here is broken will fix later
         # title = f'Payment Notification from {paymentt.school.name}'
         # email = paymentt.student.parent_email
