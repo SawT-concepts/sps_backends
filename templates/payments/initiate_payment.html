@@ -163,16 +163,16 @@
     ></script>
     <script>
         $(document).ready(function(){
-      $("form").submit(function (e) {
+          $("form").submit(function (e) {
               e.preventDefault();
-              $("#pay").val("Paying..........");
+              $("#pay").val("Loading..........");
               XpressPay.InitialisePayment({
                 amount: "{{ total }}",
                 transactionId:  "{{ p.ref }}",
-                email: "{{ p.email }}",,
+                email: "{{ p.email }}",
                 mode: "Debug",
                 publicKey: "XPPUBK-19995e83ba654840be35242359b66f8c-X",
-                currency: "NGN";,
+                currency: "NGN",
                 productId: "1001",
                 productDescription: "test",
                 callbackUrl: "{% url 'verify_payment' p.ref %}",
@@ -191,45 +191,9 @@
 
               });
             });
-
           });
     </script>
 
-    {% comment %}
-    <script
-      type="text/javascript"
-      src="https://xpresspayonlinepluginssandbox.xpresspayments.com/js/plugin.js"
-    ></script>
-    //replace this with when pointing to live
-    <script
-      type="text/javascript"
-      src="https://plugins.xpresspayonline.com/js/plugin.js"
-    ></script>
-    {% endcomment %} {% comment %} POP UP PAGE FOR PAYMENT FROM PAYSTACK {%
-    endcomment %} {% comment %}
-    <script src="https://js.paystack.co/v1/inline.js"></script>
-    <script>
-      function payWithPaystack() {
-        let currency = "NGN";
-        let plan = "";
-        let ref = "{{ p.ref }}";
-        let final_payment = ({{ total }}) * 100;
-
-        let obj = {
-          key: "{{ public_key }}",
-          email: "{{ p.email }}",
-          amount: final_payment,
-          ref: ref,
-          callback: function (response) {
-            window.location.href = "{% url 'verify_payment' p.ref %}";
-          },
-        };
-
-        var handler = PaystackPop.setup(obj);
-        handler.openIframe();
-      }
-    </script>
-    {% endcomment %}
 
     <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
   </body>
