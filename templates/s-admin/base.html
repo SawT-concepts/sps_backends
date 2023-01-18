@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}{% endblock title %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link href="{% static 'images/favicon.ico' %}" rel="shortcut icon" type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  </head>
+  <body>
+    <!-- partial:index.partial.html -->
+    <div class="background">
+        <img src="{% static 'images/bgg.png' %}" style=" background-repeat: repeat-y;" alt="">
+    </div>
+    <div class="form_wrapper">
+      <div class="form_container">
+        <div class="title_container">
+          <h2>{% block header %}{% endblock header %}</h2>
+        </div>
+        <div class="row clearfix">
+          <div class="">
+            {% comment %} form begins {% endcomment %}
+            {% block form %}
+
+            {% endblock form %}
+          </div>
+        </div>
+      </div>
+    </div>
+    {% comment %} <p class="credit">
+      Developed by
+      <a href="http://www.designtheway.com" target="_blank">Design the way</a>
+    </p> {% endcomment %}
+    <!-- partial -->
+    <script src="https://use.fontawesome.com/4ecc3dbb0b.js"></script>
+  </body>
+</html>

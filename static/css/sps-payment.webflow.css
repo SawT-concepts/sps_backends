@@ -1,0 +1,558 @@
+body {
+  font-family: 'Varela Round', sans-serif;
+  color: #333;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.background {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  min-height: 100vh;
+  padding-bottom: 6%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: #bb6060;
+}
+
+.div-block {
+  width: 100%;
+}
+
+.image {
+  position: absolute;
+  width: 100%;
+}
+
+.div-block-2 {
+  position: absolute;
+  z-index: 3;
+  width: 100%;
+  background-color: #cf0909;
+}
+
+.image-2 {
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  right: auto;
+  bottom: auto;
+  width: 100%;
+  min-height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
+.ovrlay {
+  position: absolute;
+  width: 100%;
+  min-height: 100%;
+  background-color: rgba(33, 33, 33, 0.53);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+.content {
+  position: relative;
+  z-index: 4000;
+  width: 40%;
+  min-height: 100vh;
+  margin-top: 10%;
+  padding: 0% 5% 3%;
+  border-radius: 5%;
+  background-color: #fff;
+}
+
+.advert {
+  position: fixed;
+  left: 0%;
+  top: auto;
+  right: 0%;
+  bottom: 0%;
+  z-index: 5000;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  height: 4vh;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: #070b29;
+}
+
+.add {
+  font-family: 'Varela Round', sans-serif;
+  color: #fff;
+  font-size: 13px;
+}
+
+.text-span {
+  color: #3046eb;
+}
+
+.brand {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  height: auto;
+  margin-top: 34px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.bd-name {
+  font-family: Bitter, serif;
+  color: #0c0c0c;
+}
+
+.address {
+  color: #000;
+  font-size: 12px;
+}
+
+.body {
+  font-family: Bitter, serif;
+}
+
+.form {
+  position: relative;
+  width: 100%;
+  min-height: 10vh;
+  margin: 5% 0% 10%;
+  padding: 0.18% 20px 5%;
+  border-radius: 4%;
+  background-color: #fedde4;
+}
+
+.title {
+  margin-bottom: 40px;
+  color: rgba(51, 51, 51, 0.73);
+  text-align: center;
+}
+
+.form-block {
+  margin-top: 20px;
+  padding-top: 0px;
+}
+
+.txt {
+  margin-bottom: 3px;
+  padding-left: 30px;
+  border-radius: 30px;
+}
+
+.form-inner {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: stretch;
+  -webkit-align-items: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+}
+
+.cta {
+  margin-top: 25px;
+  margin-right: 24%;
+  margin-left: 24%;
+  border-radius: 50px;
+  background-color: #ad072b;
+}
+
+.paragraph {
+  margin-right: 3%;
+  margin-left: 3%;
+  font-size: 10px;
+}
+
+.pport {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 3%;
+  padding-bottom: 3%;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.13);
+}
+
+.passport {
+  width: 25%;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+
+.heading-2 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.class_info {
+  width: 100%;
+  min-height: 20px;
+  margin-top: 0px;
+  margin-bottom: 25px;
+  padding-top: 3%;
+  padding-bottom: 3%;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.16);
+}
+
+.form-inner-text {
+  margin-bottom: 8px;
+  font-family: 'Varela Round', sans-serif;
+  text-align: left;
+}
+
+.form-inner-text.love {
+  margin-bottom: 20px;
+  text-align: right;
+}
+
+.emph {
+  font-weight: 700;
+}
+
+.emph.love {
+  text-align: right;
+}
+
+.form-payment {
+  width: 100%;
+  min-height: 20px;
+  margin-top: 0px;
+  padding-top: 3%;
+  padding-bottom: 3%;
+  border: 1px none #000;
+}
+
+.form-payment.snd {
+  margin-bottom: 5px;
+  padding-bottom: 0%;
+  border-bottom-style: solid;
+  border-bottom-color: rgba(0, 0, 0, 0.24);
+}
+
+.lynk {
+  margin-bottom: 8px;
+  font-family: 'Varela Round', sans-serif;
+  font-size: 10px;
+}
+
+.link {
+  color: #ad072b;
+  text-decoration: none;
+}
+
+.adv {
+  margin-bottom: 8px;
+  font-family: 'Varela Round', sans-serif;
+}
+
+.hold {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  padding-top: 10%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.succ {
+  margin-top: 40px;
+  font-family: Varela, sans-serif;
+  text-align: center;
+}
+
+.loader {
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  right: auto;
+  bottom: auto;
+  z-index: 10000;
+  display: none;
+  width: 100%;
+  height: 100%;
+  background-color: #070b29;
+}
+
+.verif {
+  margin-top: 20px;
+}
+
+@media screen and (max-width: 991px) {
+  .content {
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .background {
+    padding-bottom: 20%;
+  }
+
+  .content {
+    width: 80%;
+    margin-top: 15%;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  body {
+    font-family: Bitter, serif;
+  }
+
+  .background {
+    top: 0px;
+    background-color: #fff;
+  }
+
+  .image-2 {
+    left: 0%;
+    top: 0%;
+    right: 0%;
+    bottom: auto;
+    display: none;
+    overflow: hidden;
+  }
+
+  .ovrlay {
+    left: 0%;
+    top: 0%;
+    right: 0%;
+    bottom: auto;
+    display: none;
+    overflow: hidden;
+  }
+
+  .content {
+    width: 97%;
+    margin-top: 0%;
+    border-radius: 20px;
+  }
+
+  .advert {
+    background-color: #070b29;
+  }
+
+  .add {
+    font-family: 'Varela Round', sans-serif;
+  }
+
+  .text-span {
+    color: #8e5dfa;
+  }
+
+  .brand.tik {
+    margin-bottom: 60px;
+  }
+
+  .address {
+    font-family: 'Varela Round', sans-serif;
+    font-weight: 400;
+  }
+
+  .form {
+    margin-top: 15%;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
+  .form.vee {
+    background-color: #fff;
+  }
+
+  .title {
+    margin-bottom: 40px;
+  }
+
+  .title.vff {
+    margin-top: 0px;
+    margin-bottom: 10px;
+  }
+
+  .form-block.first {
+    margin-top: 50px;
+  }
+
+  .txt {
+    padding-left: 11px;
+  }
+
+  .cta {
+    font-family: 'Varela Round', sans-serif;
+  }
+
+  .cta.success {
+    margin-top: 0px;
+  }
+
+  .paragraph {
+    font-family: 'Varela Round', sans-serif;
+    font-size: 12px;
+  }
+
+  .bold-text {
+    font-weight: 700;
+  }
+
+  .info {
+    width: 100%;
+    min-height: 20px;
+  }
+
+  .pport {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    height: auto;
+    margin-top: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    border-style: none none solid;
+    border-width: 1px;
+    border-color: rgba(0, 0, 0, 0.69) rgba(0, 0, 0, 0.69) rgba(0, 0, 0, 0.14);
+  }
+
+  .passport {
+    width: 30%;
+    margin-right: 3px;
+    border-radius: 50%;
+  }
+
+  .data {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    width: 65%;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-justify-content: space-around;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+    -webkit-box-align: start;
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+  }
+
+  .heading-2 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+
+  .bodyk {
+    font-family: Bitter, serif;
+    font-weight: 700;
+  }
+
+  .class_info {
+    margin-bottom: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .class_info.vv {
+    margin-bottom: 10px;
+  }
+
+  .form-inner-text {
+    font-family: 'Varela Round', sans-serif;
+  }
+
+  .form-inner-text.love {
+    margin-bottom: 40px;
+  }
+
+  .form-payment {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: 1px none #000;
+  }
+
+  .lynk {
+    font-family: 'Varela Round', sans-serif;
+  }
+
+  .adv {
+    font-family: 'Varela Round', sans-serif;
+    font-size: 12px;
+  }
+
+  .succ {
+    margin-bottom: 0px;
+    font-family: 'Varela Round', sans-serif;
+  }
+}

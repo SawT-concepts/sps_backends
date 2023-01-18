@@ -1,0 +1,14 @@
+{% load humanize %}
+Dear Mr/Mrs {{student.last_name}}, 
+
+We would like to remind you that your child, {{student.first_name}} {{student.last_name}}, still has an unpaid balance of {{student.amount_in_debt|intcomma}} Naira. 
+This payment was due weeks ago, and we are yet to process it.
+We would appreciate it if you settled your account as soon as possible. 
+Thank you.
+
+You can always make a payment online on the payment portal through your phone, desktop, laptop, or in a cyber cafe. 
+If you have any issues or problems making a payment, please do not hesitate to contact the school management.
+
+
+Best regards,
+{{student.school.name}} management.

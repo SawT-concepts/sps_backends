@@ -1,0 +1,18 @@
+{% load humanize %}
+
+Dear Mr/Mrs {{student.last_name}},
+
+This is to notify you that we have received your recent payment in respect of the fees for your child, {{student.first_name}} {{student.last_name}},
+{{payment.amount_paid|intcomma}} was paid out of the total amount of {{payment.amount_to_be_paid|intcomma}} your child owes in debt. your child now owes {{debt|intcomma}} Naira
+
+Should you want to ever verify the reciept or generate a reciept for this payment you can always make refrence to the reciept id which is: "{{payment.payment_id}}"
+
+
+You can also click the link below to view and download your payment reciept
+
+http://myspsonline.com/payment/reciept/{{payment.payment_id}}
+
+
+Best regards,
+
+[{{payment.school.name}} management.]

@@ -1,0 +1,20 @@
+{% load humanize %}
+
+
+Dear Mr/Mrs {{student.last_name}}, 
+
+The holiday is almost over and we hope {{student.first_name}} enjoyed every second of it! We are currently progressing to a new phase in our academic calendar which is
+{{school.academic_session}}, {{school.current_term}}.
+A new phase in the academic calendar also means you will have to update your childs payment as he/she currently has {{student.amount_in_debt|intcomma}} (Naira) in debt.
+
+{% if student.is_outstanding %}
+Part of the amount in debt is due to the fact that you didn't make payment on the {{student.outstanding_amount|intcomma }} (Naira) you owe for previous session. 
+This payment was due weeks ago, and we are yet to process it.
+
+{% endif %}
+We would really appreciate it if you settled your account as soon as possible.  
+We can't wait to see {{student.first_name}} back in class again.
+
+
+Best regards,
+{{student.school.name}} management.
