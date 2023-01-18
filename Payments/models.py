@@ -51,7 +51,7 @@ class payment(models.Model):
 
         while not self.ref:
             letters = string.ascii_lowercase
-            ref = print(''.join(random.choice(letters) for i in range(10)))
+            ref = (''.join(random.choice(letters) for i in range(10)))
             object_with_similar_ref = payment.objects.filter(ref=ref)
             if not object_with_similar_ref:
                 self.ref = ref
