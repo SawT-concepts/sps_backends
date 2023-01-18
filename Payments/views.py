@@ -206,7 +206,7 @@ def initiate_payment(request, payment_id):
 
     p.hash = hashed_value
     p.save()
-    #// Generate hash value here
+    # // Generate hash value here
 
     context = {
 
@@ -219,6 +219,11 @@ def initiate_payment(request, payment_id):
     }
 
     return render(request, "payments/initiate_payment.html", context)
+
+
+def card_details(request):
+    context = {}
+    return render(request, "payments/card_details.html", context)
 
 
 def verify_payment(request, ref):
@@ -240,6 +245,8 @@ def verify_payment(request, ref):
             "debt": debt
         }
 
+
+    # todo The email send function here is broken will fix later
         # title = f'Payment Notification from {paymentt.school.name}'
         # email = paymentt.student.parent_email
         # templte = render_to_string('emails/information.html', data)

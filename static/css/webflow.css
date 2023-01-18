@@ -1951,8 +1951,8 @@ textarea.w-select {
   color: rgba(0, 0, 0, 0.577);
 }
 .txt-input {
-  width: 92.5%;
-  height: 50%;
+  width: 100%;
+  height: 60%;
   margin: 0px;
   border-style: solid;
   background-color: rgba(166, 169, 245, 0.03);
@@ -1976,7 +1976,7 @@ textarea.w-select {
   margin-top: 23px;
 }
 
-.cta {
+.cta_x {
   width: 99%;
   border-radius: 8px;
   height: 38px;
@@ -1994,7 +1994,7 @@ textarea.w-select {
   cursor: pointer;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
 }
-.cta:hover{
+.cta_x:hover{
     background: rgba(31, 34, 114, 1);
 }
 .validate{
@@ -2023,7 +2023,7 @@ textarea.w-select {
     .cover-form{
         width: 90%;
     }
-    .cta{
+    .cta_x{
         background: rgba(31, 34, 114, 1);
     }
     .error-feedback{
