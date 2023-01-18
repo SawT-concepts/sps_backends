@@ -221,9 +221,9 @@ def initiate_payment(request, payment_id):
     return render(request, "payments/initiate_payment.html", context)
 
 # Process form where user input his card information
-def card_details(request):
-    context = {}
-    return render(request, "payments/card_details.html", context)
+# def card_details(request):
+#     context = {}
+#     return render(request, "payments/card_details.html", context)
 
 
 def verify_payment(request, ref):
