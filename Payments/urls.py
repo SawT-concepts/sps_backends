@@ -5,7 +5,6 @@ urlpatterns = [
     path('<str:school_id>', home_payment, name= "home_payment"),
     path ('settled/<str:student_id>', no_pay, name="no_pay"),
     path ('input-amount/<str:payment_id>', input_amount, name="input amount"),
-    path ('pay/input-card', card_details, name="input card details"),
     path('initiate-payment/<str:payment_id>', initiate_payment, name="initiate_payment"),
     path('verify-payment/<str:ref>', verify_payment, name="verify_payment"),
     path('success/<str:payment_id>', success_payment, name="success"),
