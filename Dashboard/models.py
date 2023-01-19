@@ -28,6 +28,8 @@ class School (models.Model):
     email = models.EmailField( max_length=254)
     budget = models.BigIntegerField(null=True)
     mobile_number = models.CharField( max_length=50)
+    #? Added school passwords for admin verification
+    school_password = models.CharField( max_length=10, null=True, blank=False)
 
     #here just to check if adding a list of hex codes would work here
     brand_color = models.CharField( max_length=50)
