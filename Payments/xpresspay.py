@@ -10,9 +10,10 @@ class XpressPay:
         data = {
             "publicKey": self.XPRESS_PAY_PUBLIC_KEY,
             "transactionId": ref,
-            "mode": "Debug",
+            "mod": "Debug",
         }
 
+        # replace here with xpress pay secret key
         headers = {
             "Authorization": f"Bearer {self.XPRESS_PAY_PUBLIC_KEY}",
             "Content-Type": "application/json"
@@ -20,6 +21,6 @@ class XpressPay:
 
         response = requests.post(self.base_url, headers=headers, json=data)
 
-        print(response.status_code)
+        print(response)
 
         #check response status code
