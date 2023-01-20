@@ -17,6 +17,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+CORS_ORIGIN_ALLOW_ALL = True
+
+
+CORS_ALLOW_HEADERS = ['*']
+
 
 
 
@@ -50,10 +55,10 @@ INSTALLED_APPS = [
 SITE_ID = 1
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.RemoteUserMiddleware',
@@ -166,7 +171,6 @@ REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': ('rest_framework.schemas.coreapi.AutoSchema')
 }
 
-CORS_ORIGIN_ALLOW_ALL = True
 
 #PAYSTACK STUFFS (TAKE DOWN!!)
 PAYSTACK_SECRET_KEY = "sk_test_318b13d19abb1a43caec32abaacda9d183a04ecf"
