@@ -214,7 +214,7 @@ def initiate_payment(request, payment_id):
         "school": p.school,
         "student": student,
         "total": total,
-        "public_key": settings.PAYSTACK_PUBLIC_KEY,
+        "public_key": settings.XPRESS_PAY_PUBLIC_KEY,
         "url": url,
     }
 
