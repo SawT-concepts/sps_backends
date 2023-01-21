@@ -200,12 +200,6 @@ def initiate_payment(request, payment_id):
     amount_paid = p.amount_paid
     total = (amount_paid + 500)
     url = f"http://localhost:8000/payment/verify-payment/{p.ref}"
-
-    hashed_value = process_hash(settings.PAYSTACK_PUBLIC_KEY, p.ref, total, p.email,
-                                p.student.parent_phone_number, p.student.first_name, p.student.last_name, url)
-
-    p.hash = hashed_value
-    p.save()
     # // Generate hash value here
 
     context = {

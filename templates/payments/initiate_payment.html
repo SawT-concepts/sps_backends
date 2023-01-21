@@ -170,17 +170,18 @@
               e.preventDefault();
               $("#pay").val("Loading.....");
               
+              console.log("{{p.ref}}");
               const transactionId = "{{ p.ref }}";
               XpressPay.InitialisePayment({
                 amount: "{{ total }}" + ".00",
                 transactionId: transactionId,
                 email: "{{ p.email }}",
                 mode: "Debug",
-                publicKey: "{{public_key}}",
+                publicKey: "XPPUBK-7be3e4589f62434285a992e68d77ad2e-X",
                 currency: "NGN",
-                //productId: "",
-                //productDescription: "test",
-                callbackUrl: "{% url 'verify_payment' p.ref %}",
+                productId: "",
+                productDescription: "test",
+                callbackUrl: "{{url}}",
                 metadata: [
                   {
                     name: "string",
