@@ -19,6 +19,6 @@ class XpressPay:
 
         response = requests.post(self.base_url, headers=headers, json=data)
 
-        print(response)
+        print(response.json())
 
         #check response status code
