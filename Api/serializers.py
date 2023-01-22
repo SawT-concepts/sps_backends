@@ -64,6 +64,11 @@ class school_serializer (serializers.ModelSerializer):
         model = School
         fields = ("name",)
 
+
+class Support_serializer(serializers.ModelSerializer):
+    class Meta:
+        model = Support_Message
+        fields = ("title", "body", "school")
 # together
 class report_entry_serializer (serializers.Serializer):
     school = school_serializer()

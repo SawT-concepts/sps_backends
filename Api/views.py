@@ -34,7 +34,7 @@ class LoginView(APIView):
             return Response({"error": "Wrong login Information. Please check your username and password and try again"}, status=status.HTTP_400_BAD_REQUEST)
 
 
-#? EVERYPAGE (NAVIGATION)
+# ? EVERYPAGE (NAVIGATION)
 # view to get user profile to display in the navigation section
 class get_user_profile (generics.ListAPIView):
     permission_classes = [IsAuthenticated]
@@ -46,7 +46,19 @@ class get_user_profile (generics.ListAPIView):
 
     serializer_class = User_profile_serializer
 
-#? EVERYPAGE (NAVIGATION)
+
+class Support_message (APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        user = request.user
+        prof = profile.objects.get(user=user)
+        school = prof.school
+        serializer = Support_serializer(data=request.data)
+        serializer.save(school=school)
+        return Response(status=status.HTTP_201_CREATED)
+
+# ? EVERYPAGE (NAVIGATION)
 # the end point that connects or show all the details of the school
 class get_short_school_info (APIView):
     permission_classes = [IsAuthenticated]
@@ -62,8 +74,10 @@ class get_short_school_info (APIView):
 
     # serializer_class = school_short_info_serializer
 
-#? EVERYPAGE (NAVIGATION)
+# ? EVERYPAGE (NAVIGATION)
 # Get List of tutourials
+
+
 class Tutorial_listapiview (generics.ListAPIView):
     permission_classes = [IsAuthenticated]
     queryset = Tutorial.objects.all()
@@ -72,7 +86,7 @@ class Tutorial_listapiview (generics.ListAPIView):
     search_fields = ['title', ]
 
 
-#? DASHBOARD PAGE
+# ? DASHBOARD PAGE
 # for the table in the dashboard page
 class latest_payments (generics.ListAPIView):
     permission_classes = [IsAuthenticated]
@@ -86,15 +100,16 @@ class latest_payments (generics.ListAPIView):
         # add order by in the payment model
         pay = payment.objects.filter(
             school=school, is_active=True).order_by("-date_paid")[:60]
-            #!FIX LATER
+        #!FIX LATER
 
         return pay
 
 
-#? FOR THE GRAPH IN THE DASHBOARD PAGE
-#// todo would need to rearrange the modelling here so that it can return a data representation of the class when empty
+# ? FOR THE GRAPH IN THE DASHBOARD PAGE
+# // todo would need to rearrange the modelling here so that it can return a data representation of the class when empty
 class report_entry_view (APIView):
     permission_classes = [IsAuthenticated]
+
     def get(self, request):
         user = self.request.user
         prof = profile.objects.get(user=user)
@@ -104,8 +119,10 @@ class report_entry_view (APIView):
         serializer = report_entry_serializer(instance=data, many=True)
         return Response(data=serializer.data)
 
+
 class bar_graph_view (APIView):
     permission_classes = [IsAuthenticated]
+
     def get(self, request):
         user = self.request.user
         prof = profile.objects.get(user=user)
@@ -119,6 +136,7 @@ class bar_graph_view (APIView):
 class students_graph (APIView):
 
     permission_classes = [IsAuthenticated]
+
     def get(self, request, grade):
         user = self.request.user
         prof = profile.objects.get(user=user)
@@ -129,15 +147,14 @@ class students_graph (APIView):
         return Response(data=serializer.data)
 
 
-#? THE VIEW THAT CREATES AN ENDPOINT TO SEE, DELETE AND EDIT A CLASS
-#// todo (work on the section in the models that deletes a student's class instance after the class deletes)
+# ? THE VIEW THAT CREATES AN ENDPOINT TO SEE, DELETE AND EDIT A CLASS
+# // todo (work on the section in the models that deletes a student's class instance after the class deletes)
 class grade_view (ModelViewSet):
     permission_classes = [IsAuthenticated]
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
     search_fields = ['name', ]
 
-
-    def get_serializer_class (self):
+    def get_serializer_class(self):
         if self.action in ("list", "retrieve"):
             return grade_read_serializer
         return grade_write_serializer
@@ -146,13 +163,12 @@ class grade_view (ModelViewSet):
         user = self.request.user
         prof = profile.objects.get(user=user)
         school = prof.school
-        grades = Grade.objects.select_related('school').filter (school=school).order_by("-id")
+        grades = Grade.objects.select_related(
+            'school').filter(school=school).order_by("-id")
         return grades
-
 
     def get_serializer_context(self):
         return {'request': self.request}
-
 
     def perform_create(self, serializer):
         user = self.request.user
@@ -160,24 +176,23 @@ class grade_view (ModelViewSet):
         school = prof.school
         #! add a serializer validation here
         serializer.is_valid(raise_exception=True)
-        serializer.save( school=school)
+        serializer.save(school=school)
 
 
-#? get students based on class [CLASS PAGE]
+# ? get students based on class [CLASS PAGE]
 # // work on the serializer class here to remove payment status on adding of student
 class get_student_bcAPI (GenericAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = student_short_serializer
 
-
     def get_queryset(self):
-        u = Student.objects.select_related('grade').filter (grade= self.kwargs['grade'])
-        print (u)
+        u = Student.objects.select_related(
+            'grade').filter(grade=self.kwargs['grade'])
+        print(u)
         return u
 
     filter_backends = [filters.SearchFilter, ]
     search_fields = ('first_name',)
-
 
     def get(self, request, grade):
         #! Add a check for grade fulter here
@@ -186,22 +201,21 @@ class get_student_bcAPI (GenericAPIView):
         serializer = student_short_serializer(data, many=True)
         return Response(data=serializer.data)
 
+    def post(self, request, grade):
+        user = self.request.user
+        prof = profile.objects.get(user=user)
+        school = prof.school
+        gd = Grade.objects.get(id=grade)
+        #! add a serializer validation here
+        serializer = student_short_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        total_fees = generate_fees(school, serializer.validated_data.get(
+            'is_in_hostel'), serializer.validated_data.get('is_following_bus'), gd)
+        serializer.save(grade=gd, school=school, amount_in_debt=total_fees)
+        return Response(status=status.HTTP_201_CREATED)
 
-    def post (self, request, grade):
-            user = self.request.user
-            prof = profile.objects.get(user=user)
-            school = prof.school
-            gd = Grade.objects.get(id=grade)
-            #! add a serializer validation here
-            serializer = student_short_serializer(data=request.data)
-            serializer.is_valid(raise_exception=True)
-            total_fees = generate_fees(school, serializer.validated_data.get('is_in_hostel'), serializer.validated_data.get('is_following_bus'), gd)
-            serializer.save( grade=gd, school=school, amount_in_debt=total_fees)
-            return Response(status=status.HTTP_201_CREATED)
 
-
-
-#? STUDENT PAGE
+# ? STUDENT PAGE
 # the end point that shows the list of all the studdents
 # // PERFORM Create has to be here
 # // Implement the Write serializer
@@ -216,8 +230,6 @@ class view_student (ModelViewSet):
                         'outstanding_amount': ['gt', 'lt'],
                         'amount_in_debt': ['gt', 'lt'], }
 
-
-
     def get_serializer_class(self):
         if self.action in ("list", "retrieve"):
             return read_student_serializer
@@ -227,7 +239,8 @@ class view_student (ModelViewSet):
         user = self.request.user
         prof = profile.objects.get(user=user)
         school = prof.school
-        students = Student.objects.select_related('school').filter(school=school)
+        students = Student.objects.select_related(
+            'school').filter(school=school)
         return students
 
     def perform_create(self, serializer):
@@ -235,10 +248,10 @@ class view_student (ModelViewSet):
         prof = profile.objects.get(user=user)
         school = prof.school
         serializer.is_valid(raise_exception=True)
-        total_fees = generate_fees(school, serializer.validated_data.get('is_in_hostel'), serializer.validated_data.get('is_following_bus'), serializer.validated_data.get('grade') )
+        total_fees = generate_fees(school, serializer.validated_data.get(
+            'is_in_hostel'), serializer.validated_data.get('is_following_bus'), serializer.validated_data.get('grade'))
         #! add a serializer validation here
-        serializer.save( school=school, amount_in_debt=total_fees)
-
+        serializer.save(school=school, amount_in_debt=total_fees)
 
 
 # ? GET LIST OF THE STUDENT PAYMENT HISTORY
@@ -247,24 +260,24 @@ class payment_history (generics.ListAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = latest_payment_serializer
 
-
     def get_queryset(self):
         stud = Student.objects.get(id=self.kwargs['student'])
-        p = payment.objects.select_related('student').filter (student=stud, has_been_processed=True)
+        p = payment.objects.select_related('student').filter(
+            student=stud, has_been_processed=True)
         # todo Add order by date here
         return p
 
 
-#? School edit view
+# ? School edit view
 class school_view (ModelViewSet):
     permission_classes = [IsAuthenticated]
     serializer_class = Full_school_serializer
     queryset = School.objects.all()
 
     def perform_update(self, serializer,):
-        #// todo Add a logic here that checks the changes and fire the function to alter studentd
-        #// todo If save the initial school term and session
-        prev = School.objects.get (id = self.kwargs['pk'])
+        # // todo Add a logic here that checks the changes and fire the function to alter studentd
+        # // todo If save the initial school term and session
+        prev = School.objects.get(id=self.kwargs['pk'])
         prev_academic_session = prev.academic_session
         prev_current_term = prev.current_term
         serializer.save()
@@ -274,22 +287,23 @@ class school_view (ModelViewSet):
         current_academic_session = new.academic_session
         current_current_term = new.current_term
 
-        print (current_current_term)
-        print (prev_current_term)
+        print(current_current_term)
+        print(prev_current_term)
         print(prev_academic_session)
         print(current_academic_session)
 
         if prev_academic_session != current_academic_session or prev_current_term != current_current_term:
             school_id = prev.id
-            students = Student.objects.select_related('school').filter(school=school_id)
+            students = Student.objects.select_related(
+                'school').filter(school=school_id)
 
-            refresh_payment (school_id)
+            refresh_payment(school_id)
 
             for student in students:
                 session_update(student.id, school_id)
 
 
-#? Promote Students
+# ? Promote Students
 class Promote_students (APIView):
     permission_classes = [IsAuthenticated]
 
@@ -299,8 +313,7 @@ class Promote_students (APIView):
         school = prof.school
         return Student.objects.filter(school=school)
 
-
-    def post (self, request,):
+    def post(self, request,):
         serializer = Promotion_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         failed_students = serializer.validated_data.get('student')
@@ -315,19 +328,16 @@ class Promote_students (APIView):
         prof = profile.objects.get(user=user)
         school = prof.school
 
-        promote (x_students, school.id)
-        print ("babe")
+        promote(x_students, school.id)
         return Response("SUCCESSFUL", status=status.HTTP_200_OK)
 
 
-
-#//\todo this component here is what is going to be responsible when admin hits the end point for remind parents
-#? Remind parents
+# //\todo this component here is what is going to be responsible when admin hits the end point for remind parents
+# ? Remind parents
 class Remind_students (APIView):
     permission_classes = [IsAuthenticated]
 
-
-    def post (self, request):
+    def post(self, request):
         serializer = Promotion_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         debt_students = serializer.validated_data.get('student')
@@ -340,7 +350,6 @@ class Remind_students (APIView):
 
         ################
         x_students = []
-
 
         for students in debt_students:
             print("processed students")
@@ -362,19 +371,18 @@ class Remind_students (APIView):
         return Response("SUCCESSFUL", status=status.HTTP_200_OK)
 
 
-
 class profile_view (ModelViewSet):
     permission_classes = [IsAuthenticated]
     serializer_class = profile_serial
 
-    def get_queryset (self):
+    def get_queryset(self):
         user = self.request.user
         prof = profile.objects.get(user=user)
         school = prof.school
         return profile.objects.filter(school=school)
 
-    def perform_update (self, serializer):
-        prev = profile.objects.get (id = self.kwargs['pk'])
+    def perform_update(self, serializer):
+        prev = profile.objects.get(id=self.kwargs['pk'])
 
         prev_profile_condition = prev.is_active
         serializer.save()
@@ -393,27 +401,6 @@ class profile_view (ModelViewSet):
                 userr.save()
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # {
 #     "student":
 #     [
@@ -429,20 +416,14 @@ class profile_view (ModelViewSet):
 # }
 
 
-#user
+# user
 # {
 #     "username": "user",
 #     "password": "1234"
 # }
 
 
-
-
-
-
 # TODO super adminpassword
 
-#// TODO report entry for just students in classes
-#promote student before you upadt the school
-
-
+# // TODO report entry for just students in classes
+# promote student before you upadt the school
