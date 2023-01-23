@@ -195,6 +195,11 @@ def initiate_payment(request, payment_id):
     if p == "invalid":
         # work on this
         return redirect('home_payment', payment_id)
+    
+    if settings.DEBUG:
+        debug = True
+    else:
+        debug = False
 
     student = p.student
     amount_paid = p.amount_paid
@@ -210,6 +215,7 @@ def initiate_payment(request, payment_id):
         "total": total,
         "public_key": settings.XPRESS_PAY_PUBLIC_KEY,
         "url": url,
+        "debug": debug,
     }
 
     return render(request, "payments/initiate_payment.html", context)
