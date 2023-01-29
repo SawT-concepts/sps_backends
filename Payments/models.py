@@ -5,6 +5,7 @@ from .paystack import PayStack
 from Dashboard.models import Student
 import string
 import random
+from .remita import Remita
 
 
 # Create your models here.
@@ -57,18 +58,11 @@ class payment(models.Model):
                 self.ref = ref
         super().save(*args, **kwargs)
 
-    def amount_value(self) -> int:
-        return self.amount * 100
 
     # this function heere is supposed to check  forr verification if it return true it means the ref is verified
     def verify_payment(self):
-
-        # here i would be creating another paystack class that would connect to the api
-        # its supposed to return a dictionary here
-        paystack = PayStack()
-        print("first ref")
-        print(self.ref)
-        status, result = paystack.verify_payment(self.ref)
+        pay = Remita()
+        result, status= pay.verify_payment(self.ref)
 
         # if it has a good connection with the api then this runs
         if status:
@@ -77,10 +71,8 @@ class payment(models.Model):
 
             print(result['amount'])
 
-            if result['amount'] / 100 == (self.amount_paid + 500):
+            if result['amount'] == (self.amount_paid):
                 # here is just going to verify if thee prices match
-                print(result['amount'])
-                print("price verf")
                 self.is_active = True
                 self.has_been_processed = True
                 self.date_paid = datetime.datetime.now()

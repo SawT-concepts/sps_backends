@@ -174,7 +174,7 @@
               amount: " {{ total }}",
               narration: "fees payment",
               onSuccess: function (response) {
-                  console.log('callback Successful Response', response);
+                  window.location.href = "{% url 'verify_payment' p.ref %}";
               },
               onError: function (response) {
                   console.log('callback Error Response', response);

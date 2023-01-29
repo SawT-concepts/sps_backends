@@ -74,6 +74,7 @@ def home_payment(request, school_id):
             # // crete a no pay  function
 
             # // add redirect and an if here student payment status is settled s
+            print("pre save")
             payment.save()
             pay = payment
             # run a redirect here to run the innput amount here
@@ -116,6 +117,7 @@ def input_amount(request, payment_id):
     p = get_payment(payment_id)
 
     if p == "invalid":
+        print("instance wasnt saved")
         return redirect('home_payment', payment_id)
 
     student = p.student  # pu it here to access if the sudent follows bus a
@@ -198,7 +200,7 @@ def initiate_payment(request, payment_id):
 
     student = p.student
     amount_paid = p.amount_paid
-    total = (amount_paid + 500)
+    total = (amount_paid)
     url = f"http://localhost:8000/payment/verify-payment/{p.ref}"
     public_key = settings.REMITA_PUBLIC_KEY
     # // Generate hash value here

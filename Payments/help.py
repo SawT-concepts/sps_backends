@@ -6,8 +6,12 @@ from django.core.files import File
 from PIL import Image, ImageDraw
 import random
 from Dashboard.models import Grade
+import hashlib
+from django.conf import settings
 
-  #get student by id....
+# get student by id....
+
+
 def get_student(registration_number, school_id):
     try:
         reply = Student.objects.get(
@@ -17,8 +21,8 @@ def get_student(registration_number, school_id):
         reply = "Student does not exist"
         return reply
 
+    # validation to check the paymen
 
-    #validation to check the paymen
 
 def get_payment(id):
     try:
@@ -28,9 +32,10 @@ def get_payment(id):
         pay = "invalid"
         return pay
 
-def generate_fees (school, is_in_hostel, is_following_bus, grade_id):
+
+def generate_fees(school, is_in_hostel, is_following_bus, grade_id):
     current_term = school.current_term
-    print (grade_id.id)
+    print(grade_id.id)
     u = grade_id.id
     grade = Grade.objects.get(id=u)
 
@@ -60,7 +65,6 @@ def generate_fees (school, is_in_hostel, is_following_bus, grade_id):
 
         total = x + y + grade.second_term_school_fee
 
-
     elif current_term == "THIRD TERM":
         if is_in_hostel:
             x = grade.third_term_hostel_fee
@@ -77,16 +81,13 @@ def generate_fees (school, is_in_hostel, is_following_bus, grade_id):
     return total
 
 
-
-
-def gernerate_qr (id):
+def gernerate_qr(id):
     pay = get_payment(id)
 
     pay
     link = "https://myspsonline.com" + \
         '/' + 'payment/verify-reciept' + '/' + pay.payment_id
     print(link)
-
 
     ####################
     qrcode_img = qrcode.make(link)
@@ -97,5 +98,15 @@ def gernerate_qr (id):
     canvas.save(buffer, "PNG")
     print("rached the pt")
     pay.image.save(f'image{random.randint(0,9999)}',
-                    File(buffer))
+                   File(buffer))
     canvas.close()
+
+
+def hash_keys(ref):
+    transaction_ref = ref
+    secret_key = settings.REMITA_SECRET_KEY
+
+    string = transaction_ref + secret_key
+
+    result = hashlib.sha512(string.encode())
+    return (result.hexdigest())
