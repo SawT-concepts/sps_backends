@@ -113,8 +113,7 @@
               <span class="emph">Current Term</span>: {{ school.current_term }}
             </div>
             <div class="form-inner-text">
-              <span class="emph">Academic Session</span>: {{
-              school.academic_session }}
+              <span class="emph">Academic Session</span>: {{ school.academic_session }}
             </div>
           </div>
           <div class="form-payment snd">
@@ -137,6 +136,7 @@
                 id="pay"
                 value="Make Payment"
                 class="cta w-button"
+                onclick="makePayment()" 
                 style="background-color:{{school.brand_color}};"
               />
             </form>
@@ -156,51 +156,41 @@
       integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
       crossorigin="anonymous"
     ></script>
+    <script type="text/javascript" src="https://remitademo.net/payment/v1/remita-pay-inline.bundle.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
+
     <script src="{% static 'js/webflow.js' %}" type="text/javascript"></script>
-    <script
-      data-main="scripts/app"
-      src="https://pgsandbox.xpresspayments.com:8020/xpressPay.min.js"
-    ></script>
-    <script>
-
-        $(document).ready(function(){
-          const params = new URLSearchParams(window.location.search);
-          const transactionId = params.get('transactionid'); 
-          $("form").submit(function (e) {
-              e.preventDefault();
-              $("#pay").val("Loading.....");
-              
-              console.log("{{p.ref}}");
-              const transactionId = "{{ p.ref }}";
-              XpressPay.InitialisePayment({
-                amount: "{{ total }}" + ".00",
-                transactionId: transactionId,
-                email: "{{ p.email }}",
-                mode: "Debug",
-                publicKey: "{{ public_key }}",
-                currency: "NGN",
-                productId: "",
-                productDescription: "test",
-                callbackUrl: "{{url}}",
-                metadata: [
-                  {
-                    name: "string",
-                    value: "string"
-                  }
-                ]
-              }).then(response => {
-                if (response.success) {
-                  window.location.href = response.data.authorizeUrl
-                } else {
-                  window.location.href = response.data.authorizeUrl
-                }
-
-              });
-            });
+	  <script>         
+      function makePayment() {
+          var form = document.querySelector("#payment-form");
+          $("#pay").val("Please wait......."); 
+          var paymentEngine = RmPaymentEngine.init({
+              key: "{{ public_key }}",
+              transactionId: "{{ p.ref }}", // Replace with a reference you generated or remove the entire field for us to auto-generate a reference for you. Note that you will be able to check the status of this transaction using this transaction Id
+              customerId: "{{ p.email }}",
+              firstName: "{{ student.first_name }}",
+              lastName: "{{ student.last_name }}",
+              email: "{{ p.email }}",
+              amount: " {{ total }}",
+              narration: "fees payment",
+              onSuccess: function (response) {
+                  console.log('callback Successful Response', response);
+              },
+              onError: function (response) {
+                  console.log('callback Error Response', response);
+                  
+              },
+              onClose: function () {
+                  // redirect to home page on cancel transaction
+                  window.location.href = "{% url 'home_payment' p.school.school_id %}";
+              }
           });
-    </script>
-
-
-    <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
+           paymentEngine.showPaymentWidget();
+      }
+     
+      window.onload = function () {
+          setDemoData();
+      };
+  </script>
   </body>
 </html>

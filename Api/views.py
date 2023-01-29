@@ -402,17 +402,17 @@ class profile_view (ModelViewSet):
 
 
 # {
-#     "student":
-#     [
-#         {
-#             "id": 16,
-#             "first_name": "sheryf"
-#         },
-#         {
-#             "id": 17,
-#             "first_name": "kendrick"
-#         }
-#     ]
+    # "student":
+    # [
+    #     {
+    #         "id": 16,
+    #         "first_name": "sheryf"
+    #     },
+    #     {
+    #         "id": 17,
+    #         "first_name": "kendrick"
+    #     }
+    # ]
 # }
 
 

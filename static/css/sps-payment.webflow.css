@@ -70,7 +70,7 @@ body {
 
 .content {
   position: relative;
-  z-index: 4000;
+  z-index: 4;
   width: 40%;
   min-height: 100vh;
   margin-top: 10%;

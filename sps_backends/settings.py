@@ -23,9 +23,6 @@ CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_HEADERS = ['*']
 
 
-
-
-
 INSTALLED_APPS = [
     "corsheaders",
     'django.contrib.admin',
@@ -37,7 +34,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'django.contrib.sites',
 
-    #Installed_apps
+    # Installed_apps
     'Api',
     's_admin',
     'Configuration',
@@ -67,7 +64,6 @@ MIDDLEWARE = [
 ]
 
 
-
 ROOT_URLCONF = 'sps_backends.urls'
 
 TEMPLATES = [
@@ -88,7 +84,6 @@ TEMPLATES = [
         },
     },
 ]
-
 
 
 WSGI_APPLICATION = 'sps_backends.wsgi.application'
@@ -142,7 +137,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
@@ -159,8 +153,8 @@ STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-    'rest_framework.authentication.TokenAuthentication',
-    'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     ),
     'DEFAULT_FILTER_BACKENDS': (
         'django_filters.rest_framework.DjangoFilterBackend',
@@ -172,26 +166,16 @@ REST_FRAMEWORK = {
 }
 
 
-#PAYSTACK STUFFS (TAKE DOWN!!)
+# PAYSTACK STUFFS (TAKE DOWN!!)
 PAYSTACK_SECRET_KEY = "sk_test_318b13d19abb1a43caec32abaacda9d183a04ecf"
 PAYSTACK_PUBLIC_KEY = "pk_test_ba7b39de2d7e2470a24a362c861a98cc479773c8"
 
-# set_up dev enviroment
-if DEBUG:
-    XPRESS_PAY_PUBLIC_KEY = "XPPUBK-7be3e4589f62434285a992e68d77ad2e-X"
-    XPRESS_PAY_PRIVATE_KEY = "XPSECK-4e8790d487774a4fa6884f6d1a271bb4-X"
-else:
-    XPRESS_PAY_PUBLIC_KEY = "XPPUBK-08de3b73cc5446c8957b547e7d06c80e-X"
-    XPRESS_PAY_PRIVATE_KEY = "XPSECK-2c356aa2ce6d441da04fe61968f889e7-X"
-
-#EMail stuffs
+REMITA_PUBLIC_KEY = "QzAwMDA1NTQ2NzF8MTEwMDU1MzI4MDEwfDU3MDgzMDZjNmFhY2EyNmJmYzI5N2I1YmU5YmI0ZWQ5ZWQyOGY3NmUxOTQxMWU2NDBmNjMwZGEwZGU1NDI3MDViNzBiNWVlN2I2NjZhNGEzYmY1N2U4ZDY5OTZjY2FhODI4NWMyNjI1MTIwZGE4YmZhOGQ1M2RiODJlNjUxNjQz"
+REMITA_SECRET_KEY = "2352b014a8518633de2a0797b02959248ad16fd5ba08cd6196434c85c28ce4a03bcf502586a65f9a38bd24375442e3b1ce773a8db7300485c5884106327cb1c2"
+# EMail stuffs
 EMAIL_USE_TLS = True
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'myspsinfo@gmail.com'
 EMAIL_HOST_PASSWORD = 'rgvcsggogiebnhjh'
-
-
-
-

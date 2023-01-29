@@ -200,6 +200,7 @@ def initiate_payment(request, payment_id):
     amount_paid = p.amount_paid
     total = (amount_paid + 500)
     url = f"http://localhost:8000/payment/verify-payment/{p.ref}"
+    public_key = settings.REMITA_PUBLIC_KEY
     # // Generate hash value here
 
     context = {
@@ -208,16 +209,11 @@ def initiate_payment(request, payment_id):
         "school": p.school,
         "student": student,
         "total": total,
-        "public_key": settings.XPRESS_PAY_PUBLIC_KEY,
+        "public_key": public_key,
         "url": url,
     }
 
     return render(request, "payments/initiate_payment.html", context)
-
-# Process form where user input his card information
-# def card_details(request):
-#     context = {}
-#     return render(request, "payments/card_details.html", context)
 
 
 def verify_payment(request, ref):
@@ -273,29 +269,6 @@ def success_payment(request, payment_id):
 
     return render(request, "payments/success_payment.html", context)
 
-
-# # ///todo add a date paid to the payment model
-# class GeneratePdf(View):
-
-#     def get(self, request, *args, **kwargs):
-
-#         pay = get_payment(kwargs['payment_id'])
-
-#         if pay == "invalid":
-#             return pay
-#             # todo return a cool redirect here
-
-#         # //pass pay here as a variable for the context
-
-#         with open('temp.html', 'w') as f:
-#             f.write(render_to_string('result.html', {'data': pay}))
-
-
-#         # Converting the HTML template into a PDF file
-#         pdf = html_to_pdf('temp.html')
-
-#         # rendering the template
-#         return HttpResponse(pdf, content_type='application/pdf')
 
 
 def render_pdf_view(request, payment_id):
