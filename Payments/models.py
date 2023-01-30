@@ -69,9 +69,8 @@ class payment(models.Model):
             print(
                 'There is a status interpretation here and its showing that we have a status report 200')
 
-            print(result['amount'])
 
-            if result['amount'] == (self.amount_paid):
+            if result[0]['amount'] == (self.amount_paid):
                 # here is just going to verify if thee prices match
                 self.is_active = True
                 self.has_been_processed = True

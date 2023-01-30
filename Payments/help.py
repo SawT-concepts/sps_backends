@@ -6,8 +6,7 @@ from django.core.files import File
 from PIL import Image, ImageDraw
 import random
 from Dashboard.models import Grade
-import hashlib
-from django.conf import settings
+
 
 # get student by id....
 
@@ -101,12 +100,3 @@ def gernerate_qr(id):
                    File(buffer))
     canvas.close()
 
-
-def hash_keys(ref):
-    transaction_ref = ref
-    secret_key = settings.REMITA_SECRET_KEY
-
-    string = transaction_ref + secret_key
-
-    result = hashlib.sha512(string.encode())
-    return (result.hexdigest())

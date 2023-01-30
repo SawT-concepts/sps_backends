@@ -1,12 +1,24 @@
 from django.conf import settings
 import requests
-from .help import hash_keys
+import hashlib
+from django.conf import settings
+
+
+def hash_keys(ref):
+    transaction_ref = ref
+    secret_key = settings.REMITA_SECRET_KEY
+
+    string = transaction_ref + secret_key
+
+    result = hashlib.sha512(string.encode())
+    return (result.hexdigest())
+
 
 class Remita:
     REMITA_PUBLIC_KEY = settings.REMITA_PUBLIC_KEY
     base_url = "https://remitademo.net/payment/v1/payment/query"
 
-    def verify_payment (self, ref, *args, **kwargs):
+    def verify_payment(self, ref, *args, **kwargs):
         payload = {}
         hash_value = hash_keys(ref)
         path = f'/{ref}'
@@ -26,6 +38,6 @@ class Remita:
         else:
             response_data = response.json()
             return (response_data['responseData']), (response_data['responseCode'])
-            
-            
+
+
 # qapusfsviv

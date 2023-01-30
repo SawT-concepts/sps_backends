@@ -174,7 +174,7 @@
               amount: " {{ total }}",
               narration: "fees payment",
               onSuccess: function (response) {
-                  window.location.href = "{% url 'verify_payment' p.ref %}";
+                  window.location.href = "{{url}}";
               },
               onError: function (response) {
                   console.log('callback Error Response', response);
@@ -182,7 +182,8 @@
               },
               onClose: function () {
                   // redirect to home page on cancel transaction
-                  window.location.href = "{% url 'home_payment' p.school.school_id %}";
+                  window.location.href = "{{url}}";
+                  //window.location.href = "{% url 'home_payment' p.school.school_id %}";
               }
           });
            paymentEngine.showPaymentWidget();

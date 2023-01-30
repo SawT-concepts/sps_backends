@@ -78,7 +78,13 @@ def home_payment(request, school_id):
             payment.save()
             pay = payment
             # run a redirect here to run the innput amount here
-            return redirect('input amount', pay.payment_id)
+            p = get_payment(pay.payment_id)
+
+            if p == "invalid":
+                print("error man")
+                print(pay.student.first_name)
+            else:    
+                return redirect('input amount', pay.payment_id)
 
         # // supposed to raise a form validation error here saying what happens if we can't find student
 
