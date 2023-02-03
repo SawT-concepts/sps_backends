@@ -40,7 +40,7 @@ def process_hash(public_key, ref, amount, email, phone_number, first_name, last_
     ]
 
     body = {
-        "publicKey": ,
+        "publicKey": "",
         "transactionId": "ref",
         "amount": str(amount),
         "currency": "NGN",
